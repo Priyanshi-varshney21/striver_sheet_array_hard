@@ -74,3 +74,28 @@ def threeSum(nums):
             else:
                 right -= 1
     return ans
+
+#4 SUM
+def fourSum(self, nums, target):
+        nums.sort()
+        ans=[]
+        for i in range(len(nums)-3):
+            for j in range(i+1,len(nums)-2):
+                left=j+1
+                right=len(nums)-1
+                while left<right:
+                    total=nums[i]+nums[j]+nums[left]+nums[right]
+                    if total==target:
+                        ans.append([
+                            nums[i],
+                            nums[j],
+                            nums[left],
+                            nums[right]
+                            ])
+                        left+=1
+                        right-=1
+                    elif total<target:
+                        left+=1
+                    else:
+                        right-=1
+        return ans
