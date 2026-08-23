@@ -99,3 +99,18 @@ def fourSum(self, nums, target):
                     else:
                         right-=1
         return ans
+
+#LONGEST SUBARRAY WITH SUM 0
+def maxLen(self, arr):
+        freq={}
+        ans=0
+        sum_=0
+        for i in range(len(arr)):
+            sum_+=arr[i]
+            if sum_==0:
+                ans=i+1
+            if sum_ in freq:
+                ans=max(i,i-freq[sum_])
+            else:
+                freq[sum_]=i
+        return ans
