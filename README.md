@@ -114,3 +114,15 @@ def maxLen(self, arr):
             else:
                 freq[sum_]=i
         return ans
+
+#COOUNT SUBARRAYS WITH GIVEN XOR K
+def subarraysWithXorK(self, nums, k):
+        xor=0
+        count=0
+        freq={0:1}
+        for num in nums:
+            xor^=num
+            if xor^k in freq:
+                count+=freq[xor^k]
+            freq[xor]=freq.get(xor,0)+1
+        return count
