@@ -115,7 +115,7 @@ def maxLen(self, arr):
                 freq[sum_]=i
         return ans
 
-#COOUNT SUBARRAYS WITH GIVEN XOR K
+#COUNT SUBARRAYS WITH GIVEN XOR K
 def subarraysWithXorK(self, nums, k):
         xor=0
         count=0
@@ -125,4 +125,16 @@ def subarraysWithXorK(self, nums, k):
             if xor^k in freq:
                 count+=freq[xor^k]
             freq[xor]=freq.get(xor,0)+1
+        return count
+
+#ERASE OVER LAP INTERVAL 
+def` eraseOverlapIntervals(self, nums: List[List[int]]) -> int:
+        nums.sort(key=lambda x:x[1])
+        count=0
+        end=float('-inf')
+        for start,finish in nums:
+            if start>=end:
+                end=finish
+            else:
+                count+=1
         return count
