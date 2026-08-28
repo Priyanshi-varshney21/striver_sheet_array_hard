@@ -138,3 +138,22 @@ def` eraseOverlapIntervals(self, nums: List[List[int]]) -> int:
             else:
                 count+=1
         return count
+
+#MERGE OVERLAPPING SUBINTERVALS
+def mergeOverlap(self, intervals):
+        # Your code goes here
+        intervals.sort()
+        ans=[]
+        current_start=intervals[0][0]
+        current_end=intervals[0][1]
+        for i in range(1,len(intervals)):
+            start=intervals[i][0]
+            end=intervals[i][1]
+            if start<=current_end: #overlapping
+                current_end=max(end,current_end)
+            else:#NO overlapping
+                 ans.append([current_start,current_end])
+                 current_start=start
+                 current_end=end
+        ans.append([current_start,current_end])
+        return ans
