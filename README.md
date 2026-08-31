@@ -157,3 +157,33 @@ def mergeOverlap(self, intervals):
                  current_end=end
         ans.append([current_start,current_end])
         return ans
+
+
+#MERGE TWO SORTED ARRAYS WITHOUT USING AN EXTRA SPACE
+nums1 = [-5, -2, 4, 5]
+nums2 = [-3, 1, 8]
+n = len(nums1)
+m = len(nums2)
+gap = (n + m + 1) // 2
+while gap > 0:
+    i = 0
+    j = gap
+    while j < n + m:
+        if i < n and j < n:
+            if nums1[i] > nums1[j]:
+                nums1[i], nums1[j] = nums1[j], nums1[i]
+        # i in nums1, j in nums2
+        elif i < n and j >= n:
+            if nums1[i] > nums2[j - n]:
+                nums1[i], nums2[j - n] = nums2[j - n], nums1[i]
+        # Both elements are in nums2
+        else:
+            if nums2[i - n] > nums2[j - n]:
+                nums2[i - n], nums2[j - n] = nums2[j - n], nums2[i - n]
+        i += 1
+        j += 1
+    if gap == 1:
+        break
+    gap = (gap + 1) // 2
+print(nums1)
+print(nums2)
