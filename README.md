@@ -187,3 +187,20 @@ while gap > 0:
     gap = (gap + 1) // 2
 print(nums1)
 print(nums2)
+
+# FIND THE REPEATING AND MISSING NUMBERS 
+def findMissingRepeatingNumbers(self, nums):
+        freq={}
+        ans=[]
+        for n in nums:
+            if n in freq:
+                freq[n]+=1
+            else:
+                freq[n]=1
+        for i in range(1, len(nums) + 1):
+            if i in freq and freq[i] > 1:
+                ans.append(i)
+        for i in range(1, len(nums) + 1):
+            if i not in freq:
+                ans.append(i)
+        return ans
