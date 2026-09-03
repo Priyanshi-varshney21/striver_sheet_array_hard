@@ -204,3 +204,34 @@ def findMissingRepeatingNumbers(self, nums):
             if i not in freq:
                 ans.append(i)
         return ans
+
+#COUNT INVERSIONS
+def countInversions(arr):
+    def merge_sort(low, high):
+        if low >= high:
+            return 0
+        mid = (low + high) // 2
+        count = merge_sort(low, mid)
+        count += merge_sort(mid + 1, high)
+        i = low
+        j = mid + 1
+        temp = []
+        while i <= mid and j <= high:
+            if arr[i] <= arr[j]:
+                temp.append(arr[i])
+                i += 1
+            else:
+                temp.append(arr[j])
+                # Count inversions
+                count += mid - i + 1
+                j += 1
+        while i <= mid:
+            temp.append(arr[i])
+            i += 1
+        while j <= high:
+            temp.append(arr[j])
+            j += 1
+        for k in range(len(temp)):
+            arr[low + k] = temp[k]
+        return count
+    return merge_sort(0, len(arr) - 1)
