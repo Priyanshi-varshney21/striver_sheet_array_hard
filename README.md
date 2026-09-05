@@ -241,26 +241,19 @@ def reversePairs(nums):
     def merge_sort(low, high):
         if low >= high:
             return 0
-
         mid = (low + high) // 2
-
-        count = merge_sort(low, mid)
+       count = merge_sort(low, mid)
         count += merge_sort(mid + 1, high)
-
         # Count reverse pairs
         j = mid + 1
-
         for i in range(low, mid + 1):
             while j <= high and nums[i] > 2 * nums[j]:
                 j += 1
-
             count += j - (mid + 1)
-
         # Normal merge
         temp = []
         i = low
         j = mid + 1
-
         while i <= mid and j <= high:
             if nums[i] <= nums[j]:
                 temp.append(nums[i])
@@ -268,17 +261,26 @@ def reversePairs(nums):
             else:
                 temp.append(nums[j])
                 j += 1
-
         while i <= mid:
             temp.append(nums[i])
             i += 1
-
         while j <= high:
             temp.append(nums[j])
             j += 1
-
         nums[low:high + 1] = temp
-
         return count
-
     return merge_sort(0, len(nums) - 1)
+
+
+#MAXIMUM PRODUCT SUBARRAY IN AN ARRAY
+def maxProduct(self, nums):
+        curr_max=nums[0]
+        curr_min=nums[0]
+        ans=nums[0]
+        for i in range(1,len(nums)):
+            if nums[i]<0:
+                curr_max,curr_min=curr_min,curr_max
+            curr_max=max(nums[i],nums[i]*curr_max)
+            curr_min=min(nums[i],nums[i]*curr_min)
+            ans=max(ans,curr_max)
+        return curr_max
